@@ -26,4 +26,24 @@ class construct-binary-tree-from-preorder-and-inorder-traversal {
       node.right = helper(preorder, inorder, preorderStart + 1 + matchingIndex - inorderStart, matchingIndex + 1, inorderEnd);
       return node;
     }
+    
+    // tc -> n, sc-> n
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+      Map<Integer, Integer> cache = new HashMap<>();
+        for(int i=0; i<inorder.length; i++){
+            cache.put(inorder[i], i);
+        }  
+      return helper(preorder, inorder, 0, 0, inorder.length - 1, cache);    
+    }
+    
+    TreeNode helper(int[] preorder, int[] inorder, int preorderStart, 
+                    int inorderStart, int inorderEnd, 
+                    Map<Integer, Integer> cache){
+      if(preorderStart > preorder.length - 1 || inorderStart > inorderEnd) return null;
+      TreeNode node = new TreeNode(preorder[preorderStart]); 
+      int matchingIndex = cache.get(preorder[preorderStart]);      
+      node.left = helper(preorder, inorder, preorderStart + 1, inorderStart, matchingIndex - 1, cache);
+      node.right = helper(preorder, inorder, preorderStart + 1 + matchingIndex - inorderStart, matchingIndex + 1, inorderEnd, cache);
+      return node;
+    }
 }
