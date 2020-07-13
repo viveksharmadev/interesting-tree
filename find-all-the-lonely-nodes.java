@@ -35,4 +35,20 @@ class find-all-the-lonely-nodes {
         }
         return res;
     }
+    
+     // tc -> n, sc-> n
+    public List<Integer> getLonelyNodes(TreeNode root) {
+        List<Integer> res = new LinkedList<>();
+        if(root==null) return res;
+        lonelyNodes(root, res, false);
+        return res;
+    }
+    
+    private void lonelyNodes(TreeNode root, List<Integer> res, boolean isLonely){
+        if(root==null) return;
+        if(isLonely)
+            res.add(root.val);
+        lonelyNodes(root.left, res, root.left!=null && root.right==null);
+        lonelyNodes(root.right, res, root.right!=null && root.left==null);
+    }
 }
