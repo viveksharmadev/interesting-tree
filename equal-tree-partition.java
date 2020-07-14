@@ -32,4 +32,24 @@ class equal-tree-partition {
         map.put(sum, map.getOrDefault(sum, 0)+1);
         return sum;
     }
+    
+    // Same code just seperate conditions for clarity
+    // tc -> n, sc-> n
+    public boolean checkEqualTree(TreeNode root) {
+        if(root==null) return false;
+        Map<Integer, Integer> countMap = new HashMap<>();
+        int sum = getSum(root, countMap);
+        if(sum==0) return countMap.getOrDefault(sum,0) > 1;
+        if(sum%2!=0) return false;
+        return countMap.containsKey(sum/2);
+    }
+    
+    private int getSum(TreeNode root, Map<Integer, Integer> countMap){
+        if(root==null) return 0;
+        int left = getSum(root.left, countMap);
+        int right = getSum(root.right, countMap);
+        int sum = root.val + left + right;
+        countMap.put(sum, countMap.getOrDefault(sum,0)+1);
+        return sum;
+    }
 }
