@@ -23,4 +23,21 @@ class closest-binary-search-tree-value {
         }
         return res;
     }
+    
+    // Recursive
+    // tc -> logn, sc-> logn
+    int res;
+    public int closestValue(TreeNode root, double target) {
+        res = root.val;
+        closestValueInTree(root, target);
+        return res;
+    }
+    
+    private int closestValueInTree(TreeNode root, double target){
+        if(root==null) return 0;
+        if(Math.abs(target-root.val) < Math.abs(target-res))
+            res = root.val;
+        if(target < root.val) return closestValueInTree(root.left, target);
+        else return closestValueInTree(root.right, target);
+    }
 }
