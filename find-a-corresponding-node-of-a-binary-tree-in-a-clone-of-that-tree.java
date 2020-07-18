@@ -11,7 +11,8 @@ class find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree {
         return null;
     }
     
-    // Compact version
+     // Compact version
+    // tc -> n, sc-> n	    
     public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target) {
 		if (original == null || original == target)
 			return cloned;
