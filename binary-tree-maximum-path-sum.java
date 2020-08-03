@@ -10,32 +10,20 @@
  */
 class binary-tree-maximum-path-sum {
     // tc -> n, sc-> n
-    int max = Integer.MIN_VALUE;
+    int max;
     public int maxPathSum(TreeNode root) {
-        calculateMaxPathSum(root);
+        max = Integer.MIN_VALUE;
+        maxPathSumInTree(root);
         return max;
     }
     
-    private int calculateMaxPathSum(TreeNode node){
-        if(node==null) return 0;
-        int left = Math.max(0, calculateMaxPathSum(node.left));
-        int right = Math.max(0, calculateMaxPathSum(node.right));
-        max = Math.max(max, left+right+node.val);
-        return Math.max(left, right) + node.val;
-    }
-    
-    // Easier to understand
-     private int calculateMaxPathSum(TreeNode node){
-        if(node==null) return 0;
-        int left = calculateMaxPathSum(node.left);
-        int right = calculateMaxPathSum(node.right);
-        if(left<0){
-            max = Math.max(max, Math.max(node.val, node.val + right));
-        }else if(right < 0){
-            max = Math.max(max, Math.max(node.val, node.val + left));
-        }else{
-            max = Math.max(max, left+node.val+right);
-        }
-        return Math.max(node.val, Math.max(node.val+left, node.val+right));
+    private int maxPathSumInTree(TreeNode root){
+        if(root==null) return 0;
+        int left = maxPathSumInTree(root.left);
+        int right = maxPathSumInTree(root.right);
+        int temp = Math.max(root.val, Math.max(left, right)+root.val);
+        int res = Math.max(temp, root.val + left + right);
+        max = Math.max(max, res);
+        return temp;
     }
 }
