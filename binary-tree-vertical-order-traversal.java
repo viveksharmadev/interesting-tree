@@ -8,7 +8,7 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
-class binary-tree-vertical-order-traversal {
+class Solution {
     // tc -> n, sc-> n
     public List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
