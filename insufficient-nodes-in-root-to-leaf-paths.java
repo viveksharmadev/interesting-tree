@@ -16,3 +16,22 @@ class insufficient-nodes-in-root-to-leaf-pathsinsufficient-nodes-in-root-to-leaf
         return root.left==null && root.right==null;
     }
 }
+
+// Easier to understand
+class Solution {
+    // tc -> n, sc-> n
+    public TreeNode sufficientSubset(TreeNode root, int limit) {
+        return deleteInSufficientNodes(root, limit, 0);        
+    }
+    
+    private TreeNode deleteInSufficientNodes(TreeNode root, int limit,
+                                        int sum){
+        if(root==null) return null;
+        sum += root.val;
+        if(root.left==null && root.right==null)
+            return sum < limit ? null : root;
+        root.left = deleteInSufficientNodes(root.left, limit, sum);
+        root.right = deleteInSufficientNodes(root.right, limit, sum);
+        return root.left==null && root.right==null ? null : root;
+    }
+}
