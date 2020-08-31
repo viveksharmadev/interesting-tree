@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/delete-node-in-a-bst/
+// tc -> logn, sc-> logn or h
 class delete-node-in-a-bst {
     // tc -> logn, sc-> logn
     public TreeNode deleteNode(TreeNode root, int key) {
