@@ -23,3 +23,24 @@ class Solution {
         return root;
     }
 }
+
+// Without global variable
+class Solution {
+    // tc -> n, sc-> n
+    public TreeNode convertBST(TreeNode root) {
+        return getConvertedGreaterBST(root, new int[1]);
+    }
+    
+    private TreeNode getConvertedGreaterBST(TreeNode root, int[] sum){
+        if(root==null) return null;
+        
+        getConvertedGreaterBST(root.right, sum);
+        
+        root.val += sum[0];
+        sum[0] = root.val;
+        
+        getConvertedGreaterBST(root.left, sum);
+        
+        return root;
+    }
+}
