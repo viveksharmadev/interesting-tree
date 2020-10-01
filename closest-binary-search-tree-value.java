@@ -9,7 +9,7 @@
  * }
  */
 class closest-binary-search-tree-value {
-    // tc -> logn, sc-> logn or n if flatten tree
+    // tc -> logn, sc-> 1
     public int closestValue(TreeNode root, double target) {
         int res = root.val;
         while(root!=null){
