@@ -42,3 +42,34 @@ class Solution {
         return root;
     }
 }
+
+// Using Stack
+class Solution {
+    // tc-> n, sc-> n
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if(root==null) return new TreeNode(val);
+        
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        
+        while(!stack.isEmpty()){
+            TreeNode node = stack.pop();
+            
+            if(node!=null){
+                
+                if(val < node.val && node.left==null)
+                    node.left = new TreeNode(val);
+                else if(val > node.val && node.right==null)
+                    node.right = new TreeNode(val);
+                
+                if(val < node.val){
+                    stack.push(node.left);
+                }else if(val > node.val){
+                    stack.push(node.right);
+                }
+            }
+        }
+        
+        return root;
+    }
+}
